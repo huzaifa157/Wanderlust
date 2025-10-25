@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderlust</title>
-</head>
+
+<% layout("/layouts/boilerplate.ejs") %>
 <body>
 
     <h3>listing Details :</h3>
@@ -19,4 +14,3 @@
     <a href="/listings/<%= listing._id %>/edit"> edit </a>
     <form method="post" action="/listings/<%= listing._id %>/delete/?_method=DELETE"><button>Delete</button></form>
 </body>
-</html>
