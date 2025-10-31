@@ -1,16 +1,42 @@
-
 <% layout("/layouts/boilerplate.ejs") %>
-<body>
 
-    <h3>listing Details :</h3>
-    <ul>
-        <li><%= listing.title %></li>
-        <li><%= listing.description %></li>
-        <li>  &#8377;<%= listing.price.toLocaleString("en-PK") %></li>
-        <li><%= listing.location %></li>
-        <li><%= listing.country %></li>
-    </ul>
-    
-    <a href="/listings/<%= listing._id %>/edit"> edit </a>
-    <form method="post" action="/listings/<%= listing._id %>/delete/?_method=DELETE"><button>Delete</button></form>
-</body>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Left side: Image -->
+    <div class="col-md-7">
+      <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <img 
+          src="<%= listing.image.url %>" 
+          class="img-fluid" 
+          alt="Listing Image"
+          style="height: 420px; object-fit: cover;"
+        >
+      </div>
+    </div>
+
+    <!-- Right side: Details -->
+    <div class="col-md-5">
+      <div class="ps-md-4 mt-4 mt-md-0">
+        <h2 class="fw-bold"><%= listing.title %></h2>
+        <p class="text-muted mb-2">
+          <i class="bi bi-geo-alt-fill text-danger"></i>
+          <%= listing.location %>, <%= listing.country %>
+        </p>
+        <p class="text-secondary mb-4"><%= listing.description %></p>
+        <h4 class="fw-bold mb-4">₹<%= listing.price.toLocaleString("en-PK") %> / 2 nights</h4>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-3">
+          <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4 rounded-pill">
+            <i class="bi bi-pencil-square"></i> Edit
+          </a>
+          <form method="post" action="/listings/<%= listing._id %>/delete/?_method=DELETE">
+            <button class="btn btn-outline-danger px-4 rounded-pill">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

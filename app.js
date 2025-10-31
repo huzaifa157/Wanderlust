@@ -28,7 +28,7 @@ app.get("/" , (req,res)=>{
 
 app.get("/listings", async (req ,res)=>{
     const allListings = await Listing.find({});
-    res.render("listing/index.ejs" , {allListings})
+    res.render("listing/index" , {allListings})
 })
 
 
@@ -44,7 +44,12 @@ app.post("/listings", async(req,res)=>{
     let {title,description,image,price,location,country} = req.body;
 
     const newlisting = new Listing({
-        title , description, image, price, location, country,
+        title ,
+         description,
+         image: {filename: "listingimage" , url: image,}, 
+         price,
+         location,
+          country,
     });
 
    await newlisting.save();
@@ -62,12 +67,22 @@ app.get("/listings/:id/edit", async (req, res) => {
 
 // UPDATE route — apply edits and redirect
 app.put("/listings/:id", async (req, res) => {
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body });
-    res.redirect(`/listings/${id}`);  // ✅ redirect to that listing’s show page
+  let { id } = req.params;
+  let { title, description, image, price, location, country } = req.body;
 
+  const updatedListing = {
+    title,
+    description,
+    image: { filename: "listingimage", url: image }, // ✅ properly set nested object
+    price,
+    location,
+    country,
+  };
 
+  await Listing.findByIdAndUpdate(id, updatedListing);
+  res.redirect(`/listings/${id}`);
 });
+
 
 
 app.delete("/listings/:id/delete" , async (req,res)=>{

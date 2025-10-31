@@ -1,3 +1,95 @@
 body{
-    background-color: blueviolet;
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
 }
+
+.container{
+   flex: 1;
+}
+
+/* navbar  */
+
+.navbar{
+   height: 5rem; 
+   background-color: white !important;
+ 
+  
+}
+
+ .fa-compass-drafting{
+  color: #fe424d;
+    font-size: 2rem;
+ }
+
+ .nav-link{
+    color: #222222 !important;
+    font-weight: 600;
+ }
+
+ .navbar {
+  z-index: 1051 !important; /* Bootstrap modals use 1050, so this keeps it on top */
+}
+
+.navbar-collapse {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+/* cards  */
+  .listing-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .listing-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .listing-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-container {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 15px;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .image-container:hover img {
+    transform: scale(1.08);
+  }
+
+  .card-body {
+    padding: 12px 10px;
+  }
+
+  .price-text {
+    font-size: 0.95rem;
+  }
+
+
+
+/* for show  */
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
+
