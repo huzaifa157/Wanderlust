@@ -22,7 +22,9 @@
             </div>
             <p class="text-muted small mb-2"><%= listing.location || "Pakistan" %></p>
             <p class="fw-semibold mb-0">
-              ₹<%= listing.price.toLocaleString("en-PK") %> 
+           
+           ₹<%= (listing.price || 0).toLocaleString("en-PK") %>
+
               <span class="text-muted fw-normal">for 2 nights</span>
             </p>
           </div>

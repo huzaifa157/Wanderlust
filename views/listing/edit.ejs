@@ -5,28 +5,41 @@
         <h3  class="mt-4 mb-4 fw-semibold">Edit your List</h3>
 
 
-    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST"  class=" needs-validation" novalidate>
 
 
         <div class="mb-3">
          <label for="title" class="form-label">Title</label>
-    <input  class="form-control" type="text" name="title" value="<%= listing.title %>">
+    <input  class="form-control" type="text" name="title" value="<%= listing.title %>" required>
+    <div class="invalid-feedback">
+       Title is required.
+      </div>
+
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-    <textarea  class="form-control"  name="description"><%= listing.description %></textarea>
+    <textarea  class="form-control"  name="description" required><%= listing.description %> </textarea>
+    <div class="invalid-feedback">
+        Description is required
+      </div>
      </div>
     
      <div class="row">
      <div class="mb-3 col-md-4">
         <label for="price" class="form-label">Price</label>
-    <input  class="form-control" type="number" name="price" value="<%= listing.price %>">
+    <input  class="form-control" type="number" name="price" value="<%= listing.price %>" required>
+     <div class="invalid-feedback">
+       Title is required.
+      </div>
  </div> 
 
  <div class="mb-3 col-md-8">
         <label for="location" class="form-label">Location</label>
-    <input  class="form-control" type="text" name="location" value="<%= listing.location %>">
+    <input  class="form-control" type="text" name="location" value="<%= listing.location %>" required>
+     <div class="invalid-feedback">
+       location is required.
+      </div>
      </div>
 
 </div>
@@ -34,14 +47,20 @@
 
   <div class="mb-3">
        <label for="image" class="form-label">Image URL</label>
-       <input type="text" name="image" value="<%= listing.image.url %>" class="form-control">
+       <input type="text" name="image" value="<%= listing.image.url %>" class="form-control" required>
+        <div class="invalid-feedback">
+       Image URL is required.
+      </div>
        </div>
 
 
      
     <div class="mb-3">
         <label for="country" class="form-label">Country</label>
-    <input class="form-control" type="text" name="country" value="<%= listing.country %>">
+    <input class="form-control" type="text" name="country" value="<%= listing.country %> ">
+     <div class="invalid-feedback">
+       Country name is required.
+      </div>
  </div>
 
 
