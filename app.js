@@ -5,6 +5,7 @@ const Listing = require("./models/listing");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync")
 
 main().then(()=> console.log("DB is connected")).catch(err => console.log(err));
 
@@ -39,7 +40,7 @@ app.get("/listings/new" ,(req,res)=>{
 
 
 // create route 
-app.post("/listings", async(req,res)=>{
+app.post("/listings", wrapAsync( async(req,res)=>{
 
     let {title,description,image,price,location,country} = req.body;
 
@@ -56,7 +57,7 @@ app.post("/listings", async(req,res)=>{
    res.redirect("/listings")
 
 
-})
+}))
 
 // EDIT route — show the edit form
 app.get("/listings/:id/edit", async (req, res) => {
