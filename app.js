@@ -6,6 +6,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync")
+const ExpressError = require("./utils/ExpressError")
+const {listingSchema, validate} = require("./schema");
 
 main().then(()=> console.log("DB is connected")).catch(err => console.log(err));
 
@@ -21,9 +23,24 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname,"/public")))
 
+
+
+const validateListing = (req , res, next)=>{
+    let {error} = listingSchema.validate(req.body); /* deconstructing error from the result of listingSchema */
+    if(error){
+        throw new ExpressError(400,  "Validation Error: Please provide complete and correct information.")
+    }else{
+        next();
+    }
+
+}
+
+
 app.get("/" , (req,res)=>{
     res.send("server is there")
 })
+
+
 
 // index route 
 
@@ -40,7 +57,7 @@ app.get("/listings/new" ,(req,res)=>{
 
 
 // create route 
-app.post("/listings", wrapAsync( async(req,res)=>{
+app.post("/listings", validateListing , wrapAsync( async(req,res)=>{
 
     let {title,description,image,price,location,country} = req.body;
 
@@ -60,14 +77,14 @@ app.post("/listings", wrapAsync( async(req,res)=>{
 }))
 
 // EDIT route — show the edit form
-app.get("/listings/:id/edit", async (req, res) => {
+app.get("/listings/:id/edit", wrapAsync( async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listing/edit", { listing });
-});
+}));
 
 // UPDATE route — apply edits and redirect
-app.put("/listings/:id", async (req, res) => {
+app.put("/listings/:id", validateListing , wrapAsync( async (req, res) => {
   let { id } = req.params;
   let { title, description, image, price, location, country } = req.body;
 
@@ -82,25 +99,25 @@ app.put("/listings/:id", async (req, res) => {
 
   await Listing.findByIdAndUpdate(id, updatedListing);
   res.redirect(`/listings/${id}`);
-});
+}));
 
 
 
-app.delete("/listings/:id/delete" , async (req,res)=>{
+app.delete("/listings/:id/delete" , wrapAsync( async (req,res)=>{
     let {id} = req.params;
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings")
-})
+}))
 
 
 // show route 
 
-app.get("/listings/:id", async (req,res)=>{
+app.get("/listings/:id", wrapAsync( async (req,res)=>{
     let {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listing/show" , {listing});
 
-})
+}))
 
 
 
@@ -109,39 +126,15 @@ app.get("/listings/:id", async (req,res)=>{
 
 
 
+app.use((req, res, next) => {
+  next(new ExpressError(404, "Page Not Found!"));
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// sample 
-
-// app.get("/testListing" , async(req ,res)=>{
-//     let sampleListing = new Listing({
-//         title: "My new villa",
-//         description : "by the beach",
-//         price:120000,
-//         location : "islamabad , F9",
-//         country : "Pakistan"
-
-//     });
- 
-//     await sampleListing.save();
-//     res.send(sampleListing);
-
-// })
-
-
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+  const message = err.msg || "Something went wrong!";
+  res.status(status).render("listing/error.ejs" , {message , status});
+});
 
 
 app.listen(8080, ()=>{
