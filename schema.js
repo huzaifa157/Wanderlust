@@ -7,8 +7,20 @@ const listingSchema = Joi.object({
         location: Joi.string().required(),
         country: Joi.string().required(),
         price: Joi.number().min(0).required(),
-        image: Joi.string().allow("", null)
+        // image: Joi.string().allow("", null)
+        image: Joi.string().uri().required()
+
    
 }).required();
 
-module.exports = { listingSchema };
+const reviewSchema = Joi.object({
+        rating: Joi.number().min(1).max(5).required(),
+        comment: Joi.string().required()
+
+}).required();
+
+
+
+
+
+module.exports = { listingSchema , reviewSchema };

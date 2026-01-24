@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const review = require("./review")
 const schema = mongoose.Schema;
 
 const listingSchema = new schema({
@@ -17,7 +17,6 @@ const listingSchema = new schema({
     },
     url: {
       type: String,
-      default: "https://unsplash.com/photos/white-bed-linen-with-throw-pillows-Yrxr3bsPdS0"
     }
     
   },
@@ -25,8 +24,27 @@ const listingSchema = new schema({
     price : Number,
     location : String,
     country : String,
+    reviews:[
+      {
+        type: schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+    owner:{
+      type: schema.Types.ObjectId,
+      ref: "User"
+    }
+
+
+
 });
 
+
+listingSchema.post("findOneAndDelete", async(listing)=>{
+  if(listing){
+    await review.deleteMany({_id: {$in: listing.reviews}})
+  }
+})
 
 const Listing =  mongoose.model("Listing" , listingSchema);
 module.exports = Listing;
