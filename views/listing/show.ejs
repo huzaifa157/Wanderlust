@@ -18,11 +18,11 @@
     <div class="col-md-5">
       <div class="ps-md-4 mt-4 mt-md-0">
         <h2 class="fw-bold"><%= listing.title %></h2>
-        <p class="text-muted mb-1">
+        <p class="text-muted mb-4">
         Hosted by <b><%= listing.owner.username %></b>
         </p>
 
-        <p class="text-muted mb-2">
+        <p class="text-muted mb-4">
           <i class="bi bi-geo-alt-fill text-danger"></i>
           <%= listing.location %>, <%= listing.country %>
         </p>
@@ -32,39 +32,48 @@
 
         <!-- Buttons -->
         <div class="d-flex gap-3 mt-3">
+          <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
           <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4 rounded-pill">
-            <i class="bi bi-pencil-square"></i> Edit
+            <i class="bi bi-pencil-square">Edit</i> 
           </a>
           <form method="post" action="/listings/<%= listing._id %>/delete/?_method=DELETE">
             <button class="btn btn-outline-danger px-4 rounded-pill">
-              <i class="bi bi-trash"></i> Delete
+              <i class="bi bi-trash"> Delete</i>
             </button>
+            
           </form>
+          <% } %> 
         </div>
       </div>
     </div>
   </div>
 </div>
+                  <!-- Reviews row -->
 
-
-
-  <!-- Reviews row -->
   <div class="row mt-4">
     <h4><b>All Reviews</b></h4>
     <% listing.reviews.forEach((review, index) => { %>
       <div class="col-md-6 mb-3">
         <div class="card p-3 shadow-sm">
           <div>
+           <p >   <Strong> @<%= review.author ? review.author.username : "Anonymous" %> </Strong></p>
+
             <% for(let i=0; i<review.rating; i++){ %>⭐<% } %>
           </div>
+          
+           
+
+
           <p><%= review.comment %></p>
           <div class="d-flex justify-content-between align-items-center">
           <small class="text-muted">
             Posted on <%= new Date(review.CreatedAt).toLocaleDateString() %>
               
           </small>
+          <% if (review.author && currUser && review.author._id.toString() === currUser._id.toString()) { %>
           <form  action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
-          <button class="btn btn-sm btn-danger ">Delete</button>
+          <button class="btn btn-sm btn-danger ">Delete</button> 
+          <% } %>
           </form>
 
           </div>
@@ -80,6 +89,7 @@
 </div>
 
 
+<% if(currUser){ %>
 <div class="container mt-5">
   <div class="card shadow-sm rounded-4 p-4">
     <h4 class="mb-3 fw-bold">Leave a Review</h4>
@@ -118,3 +128,4 @@
     </form>
   </div>
 </div>
+<% } %>
