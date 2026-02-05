@@ -768,7 +768,7 @@ router.delete(
 | **Code Organization** | Clear structure makes codebase intuitive |
 | **Professional Standards** | Industry-standard pattern used in enterprise applications |
 
-### Resume Impact
+### 
 
 This MVC implementation demonstrates:
 - ✅ Understanding of **software design patterns**
@@ -777,7 +777,7 @@ This MVC implementation demonstrates:
 - ✅ Experience with **layered architecture**
 - ✅ Proficiency in **clean code practices**
 - ✅ Readiness for **team-based development**
-- ✅ Adherence to **industry best practices**
+- ✅ Adherence to **inImpactdustry best practices**
 - ✅ Scalable and **enterprise-ready** code organization
 
 ---
@@ -801,15 +801,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 // Listing ownership validation
 module.exports.isOwner = async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
-  if (!listing.owner.equals(req.user._id)) {
-    req.flash("error", "You don't have permission!");
-    return res.redirect(`/listings/${req.params.id}`);
-  }
-  next();
-};
-```
-
-### Built-in Middleware
+  if (!listing.owner.re
 
 - `express.urlencoded()` - Parse form data
 - `express.static()` - Serve static files
@@ -822,7 +814,15 @@ module.exports.isOwner = async (req, res, next) => {
 
 ## 🧪 Testing
 
-### Manual Testing Checklist
+### Manual Testing Chequals(req.user._id)) {
+    req.flash("error", "You don't have permission!");
+    return res.redirect(`/listings/${req.params.id}`);
+  }
+  next();
+};
+```
+
+### Built-in Middlewaecklist
 
 **User Authentication:**
 - [ ] Register new user
