@@ -2,14 +2,16 @@
 <% layout("/layouts/boilerplate") %>
 
 <div class="row">
-<div class="col-8 offset-2">
-<h3  class="mt-4 mb-4 fw-semibold">Creating a New List</h3>
+  <h2  class="heading text-center mt-4 mb-4 fw-bold">Register Your Property</h2>
 
-    <form action="/listings" method="post"   class="needs-validation" novalidate>
+<div class="col-10 offset-1 col-md-8 col-lg-6 offset-lg-3">
+
+
+    <form action="/listings" method="post"  enctype="multipart/form-data" class="needs-validation form" novalidate>
 
         <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" name="title" , placeholder="Add a catchy title" class="form-control" required>
+        <input type="text" name="title" , placeholder="Add a catchy title" class="form-control" id="placeholder-style"  required>
         <div class="invalid-feedback"> Please enter the title.</div>
         <div class="valid-feedback">Looks good! </div>
       
@@ -17,13 +19,13 @@
 
        <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea name="description" placeholder="Enter the description" class="form-control" required></textarea>
+        <textarea name="description" placeholder="Enter the description" class="form-control" id="placeholder-style" required></textarea>
         <div class="invalid-feedback"> Please enter the short description .</div>
       </div>
 
        <div class="mb-3">
-       <label for="image" class="form-label">Image URL</label>
-       <input type="text" name="image" placeholder="Enter image URL" class="form-control" required>
+       <label for="image" class="form-label">Upload Listing Image </label>
+       <input type="file"     name="image" placeholder="Enter image URL" class="form-control" id="placeholder-style"  required>
       
        </div>
 
@@ -31,7 +33,7 @@
 
         <div class="mb-3 col-md-8">
          <label for="number" class="form-label">Price</label>
-        <input type="number" name="price" placeholder="1200"  class="form-control" min="1" required>
+        <input type="number" name="price" placeholder="1200"  class="form-control" min="1" id="placeholder-style" required>
         <div class="invalid-feedback">
         Please enter the valid price.
       </div>
@@ -39,7 +41,7 @@
 
         <div class="mb-3 col-md-4">
         <label for="country" class="form-label">Country</label>
-        <input type="text" name="country" placeholder="Pakistan" class="form-control" required>
+        <input type="text" name="country" placeholder="Pakistan" class="form-control" id="placeholder-style" required>
         <div class="invalid-feedback">
         Please enter the country.
       </div>
@@ -49,8 +51,8 @@
 
 
         <div class="mb-3">
-         <label for="location" class="form-label">Location</label>
-        <input type="text" name="location" placeholder="F-9, Islamabad, Pakistan" class="form-control" required>
+         <label for="location" class="form-label">City</label>
+        <input type="text" name="location" placeholder=" Islamabad, Pakistan" class="form-control" id="placeholder-style"  required>
         <div class="invalid-feedback">
         Please enter the valid location.
       </div>
@@ -58,7 +60,7 @@
 
 
 
-        <button  class="  btn btn-outline-danger px-4 rounded-pill add-btn">submit</button>
+        <button  class="  btn btn-outline-success px-4 rounded-pill add-btn">submit</button>
     </form>
 
 </div>

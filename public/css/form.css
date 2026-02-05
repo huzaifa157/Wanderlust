@@ -1,0 +1,25 @@
+/* form  */ 
+.form{
+  padding: 1.5rem !important;
+  box-shadow: 0 0 15px var(--theme-color);
+  border-radius: 1rem;
+  font-family: cursive;
+}
+
+#placeholder-style{
+  border: 2px solid var(--theme-color);
+  border-radius: 2rem;
+
+}
+
+#placeholder-style::placeholder{
+    color: var(--theme-color);
+}
+
+#placeholder-style:hover{
+    box-shadow: 0 0 0 0.15rem var(--theme-color);
+}
+
+label{
+    color: green;
+}

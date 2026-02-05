@@ -1,154 +1,196 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
-<div class="container mt-5">
 
-  <!-- Listing Section -->
-  <div class="row g-4">
-    
-    <!-- Image -->
-    <div class="col-md-7">
-      <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-        <img 
-          src="<%= listing.image.url %>" 
-          alt="Listing Image"
-          class="img-fluid"
-          style="height:420px; object-fit:cover;"
-        >
+
+
+<div class="container mt-5">
+  <div class="row g-4 ">
+
+    <!-- Image Section -->
+    <div class="col-12 col-md-7 " >
+      <div class="card border-0 shadow-sm overflow-hidden h-100 bg-white"  id="show-img">
+        <img src="<%= listing.image.url %>" 
+             alt="Listing Image" 
+             class="img-fluid listing-image rounded">
       </div>
     </div>
 
-    <!-- Details -->
-    <div class="col-md-5">
-      <div class="ps-md-4">
-        <h2 class="fw-bold"><%= listing.title %></h2>
+    <!-- Details Section -->
+    <div class="col-12 col-md-5 d-flex detail-offset  ">
+      <div class="ps-md-4  mt-md-0">
 
-        <p class="text-muted">
+        <!-- Title -->
+        <h2 class="fw-bold fs-5 fs-md-3 mb-3 text-success" id="title-fs">
+          <%= listing.title %>
+        </h2>
+
+        <!-- Host -->
+        <p class="text-secondary mb-1 fs-7 fs-md-6">
           Hosted by <strong><%= listing.owner?.username || "Unknown" %></strong>
         </p>
 
-        <p class="text-muted">
-          <i class="bi bi-geo-alt-fill text-danger"></i>
-          <%= listing.location %>, <%= listing.country %>
+        <!-- Location -->
+        <p class="text-secondary mb-3 fs-7 fs-md-6">
+          <i class="bi bi-geo-alt-fill text-success me-1"></i>
+          <strong><%= listing.location %>, <%= listing.country %></strong>
         </p>
 
-        <p class="text-secondary"><%= listing.description %></p>
+        <!-- Description -->
+        <p class="text-muted fs-7 fs-md-6 mb-2">
+          <%= listing.description %>
+        </p>
 
-        <h5 class="fw-semibold mt-3">
+        <!-- Price -->
+        <h5 class="fw-semibold fs-6 fs-md-5 mb-2 text-success">
           ₹<%= (listing.price || 0).toLocaleString("en-PK") %> / night
         </h5>
 
-        <% if (currUser && listing.owner && currUser._id.toString() === listing.owner._id.toString()) { %>
-        <div class="d-flex gap-3 mt-4">
-          <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark rounded-pill px-4">
-            <i class="bi bi-pencil-square"></i> Edit
+        <!-- Edit & Delete Buttons (Owner Only) -->
+        <% if (currUser && listing.owner && currUser._id.toString()===listing.owner._id.toString()) { %>
+        <div class="d-flex flex-wrap gap-3 mt-3 mt-md-4">
+          <a href="/listings/<%= listing._id %>/edit" 
+             class="btn btn-success rounded-pill px-4 d-flex align-items-center justify-content-center">
+            <i class="bi bi-pencil-square me-2"></i> Edit
           </a>
 
-          <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-            <button class="btn btn-outline-danger rounded-pill px-4">
-              <i class="bi bi-trash"></i> Delete
+          <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" class="d-flex">
+            <button class="btn btn-outline-danger rounded-pill px-4 d-flex align-items-center justify-content-center">
+              <i class="bi bi-trash me-2"></i> Delete
             </button>
           </form>
         </div>
         <% } %>
+
       </div>
     </div>
-  </div>
 
-
-
-  
-<!-- Reviews -->
-<div class="mt-5 pt-4" >
-  <h4 class="fw-bold mb-4">All Reviews</h4>
-
-  <% if (listing.reviews.length === 0) { %>
-    <div class="card border rounded-4 p-5 text-center shadow mb-5 bg-light">
-      <i class="bi bi-chat-dots text-muted display-5 mb-3"></i>
-      <p class="text-muted fs-5 fw-light mb-0">No reviews yet. Be the first to share your experience!</p>
-    </div>
-  <% } %>
-
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <% listing.reviews.forEach((review) => { %>
-      <div class="col">
-        <div class="card review-card border-0 rounded-4 shadow-sm h-100 overflow-hidden">
-          <div class="card-body d-flex flex-column p-4">
-            
-            
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <div>
-                <h6 class="fw-bold mb-1">
-                  @<%= review.author ? review.author.username : "Anonymous" %>
-                </h6>
-                <div class="starability-result" data-rating="<%= review.rating %>"></div>
-              </div>
-              <small class="text-secondary text-nowrap ms-3">
-                <%= new Date(review.CreatedAt).toLocaleDateString('en-GB', { 
-                  day: 'numeric', month: 'short', year: 'numeric' 
-                }) %>
-              </small>
-            </div>
-
-            <!-- Comment – grows to fill space -->
-            <div class="flex-grow-1 mb-4">
-              <p class="text-muted lh-base mb-0">
-                <%= review.comment %>
-              </p>
-            </div>
-
-            <!-- Footer: Delete (aligned bottom) -->
-            <div class="mt-auto">
-              <% if (review.author && currUser && review.author._id.toString() === currUser._id.toString()) { %>
-                <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                  <button class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1">
-                    <i class="bi bi-trash3 me-1"></i> Delete
-                  </button>
-                </form>
-              <% } %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% }) %>
   </div>
 </div>
 
-<div class="mt-4">
-  <div class="card border-0 rounded-4 shadow-sm mx-auto" style="max-width: 700px;">
-    <div class="card-body p-3 p-lg-4">
 
-      <h5 class="fw-bold mb-3">Leave a Review</h5>
+    <!-- Reviews -->
+    <div class="mt-3 pt-4">
+      <h4 class="heading text-center mt-4 mb-4 fw-bold">All Reviews</h4>
 
-      <form action="/listings/<%= listing._id %>/reviews" method="POST">
-
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Rating</label>
-          <fieldset class="starability-grow">
-            <input type="radio" class="input-no-rate" name="rating" value="1" checked />
-            <% for(let i=1; i<=5; i++){ %>
-              <input type="radio" id="rate<%= i %>" name="rating" value="<%= i %>">
-              <label for="rate<%= i %>"><%= i %> star</label>
-            <% } %>
-          </fieldset>
+      <% if (listing.reviews.length===0) { %>
+        <div class="card border rounded-4 p-5 text-center shadow mb-5 bg-light">
+          <i class="bi bi-chat-dots text-muted display-5 mb-3"></i>
+          <p class="text-muted fs-5 fw-light mb-0">No reviews yet. Be the first to share your experience!</p>
         </div>
+        <% } %>
 
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Comment</label>
-          <textarea
-            name="comment"
-            class="form-control rounded-4 shadow-sm"
-            rows="3"
-            placeholder="Share your honest experience..."
-            required
-          ></textarea>
-        </div>
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+            <% listing.reviews.forEach((review)=> { %>
+              <div class="col">
+                <div class="card review-card border-0 rounded-4 shadow-sm h-100 overflow-hidden">
+                  <div class="card-body d-flex flex-column p-4">
 
-        <button class="btn btn-outline-dark rounded-pill px-4 py-2 shadow-sm">
-          <i class="bi bi-send-fill me-2"></i> Submit Review
-        </button>
 
-      </form>
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                      <div>
+                        <h6 class="fw-bold mb-1">
+                          @<%= review.author ? review.author.username : "Anonymous" %>
+                        </h6>
+                        <div class="starability-result" data-rating="<%= review.rating %>"></div>
+                      </div>
+                      <small class="text-secondary text-nowrap ms-3">
+                        <%= new Date(review.CreatedAt).toLocaleDateString('en-GB', { day: 'numeric' , month: 'short' ,
+                          year: 'numeric' }) %>
+                      </small>
+                    </div>
 
+                    <!-- Comment – grows to fill space -->
+                    <div class="flex-grow-1 mb-4">
+                      <p class="text-muted lh-base mb-0">
+                        <%= review.comment %>
+                      </p>
+                    </div>
+
+                    <!-- Footer: Delete (aligned bottom) -->
+                    <div class="mt-auto">
+                      <% if (review.author && currUser && review.author._id.toString()===currUser._id.toString()) { %>
+                        <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                          method="POST">
+                          <button class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1">
+                            <i class="bi bi-trash3 me-1"></i> Delete
+                          </button>
+                        </form>
+                        <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+          </div>
     </div>
-  </div>
+
+    <div class="col-10 offset-1 col-md-6 col-lg-4 offset-lg-4">
+        <h2 class="heading text-center mt-4 mb-4 fw-bold">Leave a Review</h2>
+  
+        
+        
+
+          <form   class="form" action="/listings/<%= listing._id %>/reviews" method="POST">
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Rating</label>
+              <fieldset class="starability-grow">
+                <input type="radio" class="input-no-rate" name="rating" value="1" checked />
+                <% for(let i=1; i<=5; i++){ %>
+                  <input type="radio" id="rate<%= i %>" name="rating" value="<%= i %>">
+                  <label for="rate<%= i %>">
+                    <%= i %> star
+                  </label>
+                  <% } %>
+              </fieldset>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Comment</label>
+              <textarea name="comment" class="form-control rounded-4 shadow-sm" rows="3" id="placeholder-style"
+                placeholder="Share your honest experience..." required></textarea>
+            </div>
+
+            <button class="btn btn-outline-success rounded-pill px-4 py-2 shadow-sm">
+              <i class="bi bi-send-fill me-2"></i> Submit 
+            </button>
+
+          </form>
+
+        
+      
+    </div>
+
+<!-- map  -->
+<div class="col-12 col-md-6 col-lg-6 offset-lg-3 ">
+
+  <% if(listing.geometry?.coordinates?.length === 2){ %>
+
+    <h2 class="heading text-center mt-4 mb-4 fw-bold">Where You'll Be</h2>
+
+    <div id="map" class="w-100 rounded-pill" style="height: 300px;"></div>
+
+    <script>
+      const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
+      mapboxgl.accessToken = "<%= mapToken %>";
+
+      const map = new mapboxgl.Map({
+        container: 'map',
+        center: coordinates,
+        zoom: 9
+      });
+
+      new mapboxgl.Marker()
+        .setLngLat(coordinates)
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 })
+            .setHTML("<p>Exact Location Provided After Booking</p>")
+        )
+        .addTo(map);
+    </script>
+
+  <% } else { %>
+    <p class="text-muted text-center">📍 Location map not available.</p>
+  <% } %>
+
 </div>

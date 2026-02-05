@@ -1,16 +1,16 @@
 <% layout("/layouts/boilerplate") %>
 
    <div class="row">
-     <div class="col-8 offset-2">
-        <h3  class="mt-4 mb-4 fw-semibold">Edit your List</h3>
+     <h2 class="heading text-center mt-4 mb-4 fw-bold">Update Your Property</h2>
+     <div class="col-10 offset-1 col-md-6 col-lg-5 offset-lg-4">
+  
 
-
-    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST"  class=" needs-validation" novalidate>
+    <form action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data" method="POST"  class=" needs-validation form" novalidate>
 
 
         <div class="mb-3">
          <label for="title" class="form-label">Title</label>
-    <input  class="form-control" type="text" name="title" value="<%= listing.title %>" required>
+    <input  class="form-control" type="text" name="title" value="<%= listing.title %>" id="placeholder-style"  required>
     <div class="invalid-feedback">
        Title is required.
       </div>
@@ -19,7 +19,7 @@
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-    <textarea  class="form-control"  name="description" required><%= listing.description %> </textarea>
+    <textarea id="placeholder-style"  class="form-control"  name="description" required><%= listing.description %> </textarea>
     <div class="invalid-feedback">
         Description is required
       </div>
@@ -28,15 +28,15 @@
      <div class="row">
      <div class="mb-3 col-md-4">
         <label for="price" class="form-label">Price</label>
-    <input  class="form-control" type="number" name="price" value="<%= listing.price %>" required>
+    <input  class="form-control" type="number" name="price" value="<%= listing.price %>" id="placeholder-style"  required>
      <div class="invalid-feedback">
        Title is required.
       </div>
  </div> 
 
  <div class="mb-3 col-md-8">
-        <label for="location" class="form-label">Location</label>
-    <input  class="form-control" type="text" name="location" value="<%= listing.location %>" required>
+        <label for="location" class="form-label">City</label>
+    <input  class="form-control" type="text" name="location" value="<%= listing.location %>" id="placeholder-style"  required>
      <div class="invalid-feedback">
        location is required.
       </div>
@@ -46,18 +46,15 @@
 
 
   <div class="mb-3">
-       <label for="image" class="form-label">Image URL</label>
-       <input type="text" name="image" value="<%= listing.image.url %>" class="form-control" required>
-        <div class="invalid-feedback">
-       Image URL is required.
-      </div>
+       <label for="image" class="form-label">Upload New Image</label>
+       <input type="file" name="image" value="<%= listing.image.url %>" class="form-control" id="placeholder-style"  >
        </div>
 
 
      
     <div class="mb-3">
         <label for="country" class="form-label">Country</label>
-    <input class="form-control" type="text" name="country" value="<%= listing.country %> " required>
+    <input class="form-control" type="text" name="country" value="<%= listing.country %> " id="placeholder-style"  required>
      <div class="invalid-feedback">
        Country name is required.
       </div>

@@ -1,31 +1,26 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
 <div class="row mt-3">
-  <div class="col-6 offset-3">
-     <h3  class="mt-4 mb-4 fw-semibold">Login</h3>
+    <h2 class="heading text-center mt-4 mb-2 fw-bold"> Your next adventure awaits</h2>
+    <p class="fw-semibold text-center text-muted mb-4 para">Login to continue your journey and explore amazing stays.</p>
+  <div class="col-10 offset-1 col-md-6 col-lg-5 offset-lg-4">
 
-    <form action="/login" method="post" class="needs-validation" novalidate>
-<!-- 
-    <div class="mb-3">
-        <label for="username" class="form-label"> Username</label>
-        <input type="text"  name="username" placeholder="Enter your Username" class="form-control" required>
-        <div class="invalid-feedback"> Please enter the Username.</div>
-    </div>
-       -->
+    <form action="/login" method="post" class="needs-validation  form" novalidate>
+
     <div class="mb-4">
         <label for="email" class="form-label"> Email</label>
-        <input type="email" name="email" placeholder="Enter your Email" class="form-control" required>
+        <input type="email" name="email" placeholder="Enter your Email" id="placeholder-style" class="form-control" required>
         <div class="invalid-feedback"> Please enter your email.</div>
     </div>
       
     <div class="mb-4">
         <label for="password" class="form-label"> Password</label>
-        <input type="password" name="password" placeholder="Enter your password" class="form-control" required>
+        <input type="password" name="password" placeholder="Enter your password" class="form-control"  id="placeholder-style"required>
         <div class="invalid-feedback"> Please enter the password.</div>
     </div>
       
 
-<button  class="  btn btn-outline-danger px-4 rounded-pill add-btn">submit</button>
+<button  class="  btn btn-outline-success px-4 rounded-pill mb-3 add-btn">Login</button>
 
 
     </form>

@@ -1,0 +1,92 @@
+
+.footer {
+  background-color: #ffffff; 
+  padding: 3rem 1rem 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #198754; 
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
+  color: #146c43; 
+}
+
+.footer-tagline {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+
+}
+
+
+
+.footer-links li {
+  position: relative;
+}
+
+.footer-links a {
+  text-decoration: none;
+   color: green  ;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #198754; /* green on hover */
+  transform: translateY(-3px);
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #198754; /* green underline */
+  transition: width 0.3s ease-in-out;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* --- Footer Bottom --- */
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #adb5bd;
+ 
+}
+
+/* --- Mobile Fix --- */
+@media (max-width: 576px) {
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.8rem;
+  }
+}

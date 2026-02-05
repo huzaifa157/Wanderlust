@@ -1,34 +1,37 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
 <div class="row mt-3">
-  <div class="col-6 offset-3">
-     <h3  class="mt-4 mb-4 fw-semibold">SignUp</h3>
+     <h2 class=" heading text-center mt-4 mb-2 fw-bold">Start Your Journey with Wanderlust</h2>
+     <p class="fw-semibold text-center text-muted mb-4 para"> Sign up to explore unique stays and unforgettable experiences.</p>
 
-    <form action="/signup" method="post" class="needs-validation" novalidate>
+  <div class="col-10 offset-1 col-md-8 col-lg-6 offset-lg-3">
+      
+
+    <form action="/signup" method="post" class="needs-validation  form" novalidate>
 
     <div class="mb-3">
         <label for="username" class="form-label"> Username</label>
-        <input type="text"  name="username" placeholder="Enter your Username" class="form-control" required>
+        <input type="text"  name="username" placeholder="Enter your Username" class="form-control" id="placeholder-style" required>
         <div class="invalid-feedback"> Please enter the Username.</div>
         <div class="valid-feedback">Looks good! </div>
     </div>
       
     <div class="mb-3">
         <label for="email" class="form-label"> Email</label>
-        <input type="email" name="email" placeholder="Enter your Email" class="form-control" required>
+        <input type="email" name="email" placeholder="Enter your Email" class="form-control"  id="placeholder-style" required>
         <div class="invalid-feedback"> Please enter your email.</div>
         <div class="valid-feedback">Looks good! </div>
     </div>
       
     <div class="mb-3">
         <label for="password" class="form-label"> Password</label>
-        <input type="password" name="password" placeholder="Enter your password" class="form-control" required>
+        <input type="password" name="password" placeholder="Enter your password" class="form-control" id="placeholder-style" required>
         <div class="invalid-feedback"> Please enter the password.</div>
         <div class="valid-feedback">Looks good! </div>
     </div>
       
 
-<button  class="  btn btn-outline-danger px-4 rounded-pill add-btn">submit</button>
+<button  class="  btn btn-outline-success px-4 rounded-pill add-btn mt-2 mb-2">Create Account</button>
 
 
     </form>

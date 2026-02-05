@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV != "production"){
+require('dotenv').config();
+}
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -9,15 +12,18 @@ const listingsRouter = require("./Routes/listings");
 const reviewsRouter = require("./Routes/review");
 const userRouter = require("./Routes/user")
 const session = require("express-session");
+const MongoStore = require('connect-mongo').default;
 const flash = require("connect-flash")
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 
+const dbUrl = process.env.ATLAS_URL
+
 main().then(() => console.log("DB is connected")).catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
+  await mongoose.connect(dbUrl);
 }
 
 app.set("view engine", "ejs");
@@ -28,8 +34,20 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")))
 
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto:{
+    secret:process.env.SECRET,
+  },
+  touchAfter: 24*3600,
+
+});
+
+
+
 const sessionOptions = {
-  secret: "super-secret",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -38,6 +56,8 @@ const sessionOptions = {
     httpOnly: true,
   },
 };
+
+
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -59,13 +79,13 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error")
   res.locals.currUser = req.user;
   next()
+  
 })
 
 
-
-app.get("/", (req, res) => {
-  res.send("server is there")
-})
+// app.get("/", (req, res) => {
+//   res.send("server is there")
+// })
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);

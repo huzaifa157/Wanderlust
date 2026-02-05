@@ -1,11 +1,27 @@
 
-
+:root{
+  --theme-color: rgba(25, 135, 84, 0.5);
+}
 
 body{
    display: flex;
    flex-direction: column;
    min-height: 100vh;
 }
+
+.heading{
+  color: green;
+  font-family: cursive;
+}
+
+.para{
+  font-size: 1rem;
+  font-style: italic;
+  font-family: sans-serif;
+}
+
+
+
 
 .container{
    flex: 1;
@@ -17,22 +33,29 @@ body{
    height: 5rem; 
    background-color: white !important;
  
-  
 }
 
+
+
  .fa-compass-drafting{
-  color: #fe424d;
+  color: green;
     font-size: 2rem;
+ }
+ .icon{
+  color: green ;
+ }
+ 
+ .nav-link:hover{
+    background-color: rgba(25, 135, 84, 0.5);
+    border-radius: 2rem;
  }
 
  .nav-link{
-    color: #222222 !important;
+    color: green !important;
     font-weight: 600;
  }
 
- .navbar {
-  z-index: 1051 !important; /* Bootstrap modals use 1050, so this keeps it on top */
-}
+ 
 
 .navbar-collapse {
   background-color: white;
@@ -58,29 +81,29 @@ body{
   }
 
   .image-container {
-    width: 100%;
-    height: 220px;
+    width: 18.5rem;
+    height: 20rem;
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 1rem;
   }
 
   .image-container img {
     width: 100%;
-    height: 100%;
+    height: 20rem;
     object-fit: cover;
     transition: transform 0.4s ease;
   }
 
   .image-container:hover img {
     transform: scale(1.08);
+    border-radius: 1rem;
   }
 
-  .card-body {
-    padding: 12px 10px;
-  }
+  
 
   .price-text {
     font-size: 0.95rem;
+    margin-bottom: 1rem;
   }
 
 
@@ -88,11 +111,111 @@ body{
 /* for show  */
 
 .card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-radius 0.2s ease;
 }
+
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 18px rgba(25, 135, 84, 0.5);
+  border-radius: 2rem; /* smoother, visible on hover */
+}
+
+/* show */
+.listing-image {
+  width: 100%;
+  /* max-height: 450px;       Prevents huge images */
+  object-fit: cover;       
+  border-radius: 4rem;  
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect: zoom slightly and lift */
+.listing-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+#title-fs{
+  font-size: 3rem !important;
+}
+
+#show-img{
+  border-radius: 4rem;
+
+}
+
+/* Details section offset for larger screens */
+.detail-offset {
+  display: flex;
+  align-items: flex-start; /* default alignment */
+  
+}
+
+/* Apply offset for large screens (≥992px) */
+@media (min-width: 992px) {
+  .detail-offset {
+    padding-top: 3rem; 
+  }
 }
 
 
+
+
+
+
+
+
+.i-search {
+  display: inline-block; 
+  margin-left: 5px; 
+}
+
+
+
+
+
+
+/* navbar searching  */
+
+#searching{
+  width: 20vw;
+   border: 2px solid rgba(25, 135, 84, 0.5);
+}
+#searching::placeholder{
+  color: rgba(25, 135, 84, 0.5);
+}
+
+#searching:hover{
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
+}
+
+.search-btn{
+  margin-left: 0.3rem;
+}
+
+
+.search-btn:hover{
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
+}
+
+
+
+.map-box {
+  width: 100%;
+  height: 300px;
+  border-radius: 2rem;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .map-box {
+    height: 350px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .map-box {
+    height: 60vw;
+  }
+}

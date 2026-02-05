@@ -2,10 +2,10 @@
 
 
 
-<div class="container mt-5">
-  <h3 class="mb-4 fw-semibold">All Listings</h3>
+<div class="container mt-5 ">
+  <!-- <h3 class="mb-4 fw-semibold">All Listings</h3> -->
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+  <div class="row row-cols-1  row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-2  ">
     <% for(let listing of allListings) { %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
       <div class="col">
@@ -13,17 +13,22 @@
           <div class="image-container">
             <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing Image"   >
           </div>
-          <div class="card-body px-2 pb-3">
+          <div class="card-body px-2 pb-1">
             <div class="d-flex justify-content-between align-items-start">
               <h6 class="fw-semibold mb-1"><%= listing.title %></h6>
               
             </div>
-            <p class="text-muted small mb-2"><%= listing.location || "Pakistan" %></p>
-            <p class="fw-semibold mb-0">
+            <div class="d-flex align-items-center gap-1">
+  <p class="text-muted small mb-0 fw-bold"><%= listing.location %>,</p>
+  <p class="text-muted small mb-0 fw-bold"><%= listing.country %></p>
+</div>
+
+            
+            <p class="fw-semibold mb-1 mt-1">
            
            ₹<%= (listing.price || 0).toLocaleString("en-PK") %>
 
-              <span class="text-muted fw-normal">for 2 nights</span>
+              <span class="text-muted fw-semibold">/night</span>
             </p>
           </div>
         </div>
