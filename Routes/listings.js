@@ -5,7 +5,7 @@ const { isloggedIn, isOwner, validateListing } = require("../middleware");
 const ListingController = require("../Controllers/listing")
 const multer  = require('multer')
 const {storage} = require("../CloudConfig")
-const upload = multer({ storage })
+const upload = multer({ storage:storage })
 
 
 router.get("/search", wrapAsync( ListingController.searchListings));

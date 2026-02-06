@@ -38,6 +38,7 @@ module.exports.createListings = async (req, res) => {
   try {
     const { title, description, price, location, country } = req.body;
 
+
     if (!req.file) {
       req.flash("error", "Please upload an image");
       return res.redirect("/listings/new");
@@ -63,7 +64,7 @@ module.exports.createListings = async (req, res) => {
       location,
       country,
       image: {
-        url: req.file.path,
+        url: req.file.secure_url,
         filename: req.file.filename,
       },
       geometry: {
@@ -103,11 +104,13 @@ module.exports.updateListings = async (req, res) => {
         const { id } = req.params;
         let { title, description, price, location, country } = req.body;
         const updatedListing = { title, description, price, location, country };
-
+         
+          
+  console.log(req.file)
         // Only update image if new file uploaded
         if (req.file) {
             updatedListing.image = {
-                url: req.file.path,
+                url: req.file.secure_url,
                 filename: req.file.filename
             };
         }
