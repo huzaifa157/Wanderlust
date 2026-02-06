@@ -213,9 +213,18 @@ body{
   }
 }
 
+
+@media (max-width:736px) {
+  #title-fs{
+  font-size: 1.8rem !important;
+}
+
+}
+
 /* Desktop */
 @media (min-width: 992px) {
   .map-box {
     height: 60vw;
   }
+
 }
