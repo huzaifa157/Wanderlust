@@ -22,50 +22,12 @@ body{
 }
 
 
-
-
 .container{
    flex: 1;
 }
 
-/* navbar  */
-
-.navbar{
-   height: 5rem; 
-   background-color: white !important;
- 
-}
-
-
-
- .fa-compass-drafting{
-  color: green;
-    font-size: 2rem;
- }
- .icon{
-  color: green ;
- }
- 
- .nav-link:hover{
-    background-color: rgba(25, 135, 84, 0.5);
-    border-radius: 2rem;
- }
-
- .nav-link{
-    color: green !important;
-    font-weight: 600;
- }
-
- 
-
-.navbar-collapse {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 10px;
-}
-
-/* cards  */
-  .listing-link {
+                                          /* cards  */
+ .listing-link {
     text-decoration: none;
     color: inherit;
   }
@@ -100,8 +62,6 @@ body{
     border-radius: 1rem;
   }
 
-  
-
   .price-text {
     font-size: 0.95rem;
     margin-bottom: 1rem;
@@ -121,10 +81,9 @@ body{
   border-radius: 2rem; /* smoother, visible on hover */
 }
 
-/* show */
+/* for show image*/
 .listing-image {
   width: 100%;
-  /* max-height: 450px;       Prevents huge images */
   object-fit: cover;       
   border-radius: 4rem;  
   transition: transform 0.3s, box-shadow 0.3s;
@@ -166,38 +125,6 @@ body{
 
 
 
-.i-search {
-  display: inline-block; 
-  margin-left: 5px; 
-}
-
-
-
-
-
-
-/* navbar searching  */
-
-#searching{
-  width: 20vw;
-   border: 2px solid rgba(25, 135, 84, 0.5);
-}
-#searching::placeholder{
-  color: rgba(25, 135, 84, 0.5);
-}
-
-#searching:hover{
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
-}
-
-.search-btn{
-  margin-left: 0.3rem;
-}
-
-
-.search-btn:hover{
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
-}
 
 
 

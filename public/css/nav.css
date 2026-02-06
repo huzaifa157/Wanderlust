@@ -1,0 +1,65 @@
+
+/* navbar  */
+
+.navbar{
+   height: 5rem; 
+   background-color: white !important;
+ 
+}
+
+
+
+ .fa-compass-drafting{
+  color: green;
+    font-size: 2rem;
+ }
+ .icon{
+  color: green ;
+ }
+ 
+ .nav-link:hover{
+    background-color: rgba(25, 135, 84, 0.5);
+    border-radius: 2rem;
+ }
+
+ .nav-link{
+    color: green !important;
+    font-weight: 600;
+ }
+
+ 
+
+.navbar-collapse {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.i-search {
+  display: inline-block; 
+  margin-left: 5px; 
+}
+
+
+/* navbar searching  */
+
+#searching{
+  width: 20vw;
+   border: 2px solid rgba(25, 135, 84, 0.5);
+}
+#searching::placeholder{
+  color: rgba(25, 135, 84, 0.5);
+}
+
+#searching:hover{
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
+}
+
+.search-btn{
+  margin-left: 0.3rem;
+}
+
+
+.search-btn:hover{
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
+}
