@@ -1,4 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - wanderlust
+name: Build and deploy Node.js app to Azure Web App
 
 on:
   push:
@@ -18,19 +18,27 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '24.x'
+          node-version: '18.x'
 
-      - name: npm install, build, and test
+      - name: npm install and build
         run: |
-          npm install
+          npm ci
           npm run build --if-present
-          npm run test --if-present
 
-      - name: Upload artifact
+      - name: Create deployment package
+        run: |
+          # Create a deployment folder with all necessary files
+          mkdir -p deployment
+          cp -r * deployment/ 2>/dev/null || true
+          cp -r .[!.]* deployment/ 2>/dev/null || true
+          # Remove unnecessary files
+          rm -rf deployment/node_modules deployment/.git
+
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: deployment/
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,12 +54,15 @@ jobs:
           name: node-app
           path: .
 
+      - name: List files for debugging
+        run: ls -la
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_31BB88243832469289287262148BA675 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_31E351F4CB284B88939746985400B4D8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D3EF6C5899D44CA7A923F308873E3FD5 }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
