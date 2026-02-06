@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - UnziWanderlust
+name: Build and deploy Node.js app to Azure Web App - unziWanderLust
 
 on:
   push:
@@ -51,15 +51,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E866DA79F22E4BA2A503CC18C9642958 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FFCF57B80D634CEB85A81C09E73CAB2B }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8CD02F83001C4783A4DF303279A46BB7 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7DEA17403A5E4120A1D3D77CAE00EE29 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5019162FBD844341B221AD4294E982B6 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_DB2D11CFC6D540BF97F4DA3299ACCED8 }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'UnziWanderlust'
+          app-name: 'unziWanderLust'
           slot-name: 'Production'
           package: .
           
