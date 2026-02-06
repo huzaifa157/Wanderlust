@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'wanderlust'
           slot-name: 'Production'
-          package: ./
+          package: ./node-app
           
